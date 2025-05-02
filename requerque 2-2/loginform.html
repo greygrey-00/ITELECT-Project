@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+<style>       
+        body{
+            background-color: rgb(0, 0, 0);
+            background-image: url(ewq.jpg);
+            background-size: 150%;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 5px;
+            color: white;
+        }
+       .greet-box{
+            background-color: rgba(41, 38, 33, 0.571);
+            border-radius: 40px;
+            margin: 5%;
+            margin-left: 50%;
+            padding: 100px;
+       }
+       .navbar-brand{
+        color: rgb(245, 248, 39);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 185%;
+       }
+       .container-fluid{
+        background: brown;
+       }
+    
+
+</style>
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="R.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            LIFEBRARY
+          </a>
+        </div>
+      </nav>
+    <div class="greet-box">
+        <h2 class="mb-4 text-center">Log In</h2>
+        <div class="mb-3">
+        <input type="text" class="form-control mb-2" id="nameInput" placeholder="Enter your email">
+    </div>
+    <div class="greetpass-box">
+        <div class="mb-3">
+        <input type="password" class="form-control mb-2" id="passwordInput" placeholder="Enter your password">
+    </div>
+        <button onclick="loginUser()" class="btn btn-dark w-100">Submit</button>
+        <div class="alert alert-info mt-3 d-none" id="greetingAlert" role="alert"></div>
+    </div>
+
+    <script>
+             function loginUser() {
+            const name = document.getElementById("nameInput").value;
+            const password = document.getElementById("passwordInput");
+            const alertBox = document.getElementById("greetingAlert");
+        
+            const correctPassword = "password123";
+            const correctUsername = "admin123";
+
+        if (nameInput === correctUsername && passwordInput === correctPassword) {
+
+            alertBox.innerText = `Login successful`;
+            alertBox.classList.remove("d-none");
+            alertBox.classList.remove("alert-danger");
+            alertBox.classList.add("alert-success");
+
+        }else{
+            alertBox.innerText = "Incorrect password! Try Again.";
+            alertBox.classList.remove("d-none");
+            alertBox.classList.replace("alert-success");
+            alertBox.classList.add("alert-danger");
+
+        }
+    }
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>
