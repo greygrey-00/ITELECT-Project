@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeBrary Book Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+      min-height: 100vh;
+      background-image: url(b271576b4bc466ba1c9bdcddc5bca6fa-scaled.jpeg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      background-color: #198754;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      color: white !important;
+    }
+
+    .navbar-brand img {
+      height: 36px;
+      margin-right: 10px;
+      border-radius: 6px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.35);
+      border: none;
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: box-shadow 0.2s;
+      padding: 40px;
+      
+    }
+    
+    .card-title {
+      color: #1976d2;
+      font-weight: 600;
+    }
+
+    .carousel-item img {
+      height: 500px;
+      
+      border-radius: 12px;
+    }
+
+    .book-img {
+      height: 500px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .modal-content {
+      border-radius: 24px;
+    }
+
+    .qty-btn {
+      font-size: 1.2rem;
+      width: 40px;
+    }
+
+    .quantity {
+      font-size: 1.2rem;
+      margin: 0 15px;
+    }
+
+    .footer {
+      background: #1976d2;
+      color: white;
+      text-align: center;
+      padding: 16px 0;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  
+<nav class="navbar navbar-expand-lg">
+  <div class="container d-flex justify-content-between">
+    <a class="navbar-brand" href="#">
+      <img src="R.png" alt="Logo">
+      LifeBrary Bookstore
+    </a>
+    <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+
+  
+  <div class="container mt-4">
+    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="car.png" class="d-block w-100" alt="Book 1">
+        </div>
+        <div class="carousel-item">
+          <img src="ca2.jpg" class="d-block w-100" alt="Book 2">
+        </div>
+        <div class="carousel-item">
+          <img src="qqw.webp" class="d-block w-100" alt="Book 3">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div class="container mt-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="book1.jpg" class="card-img-top book-img" alt="Life">
+          <div class="card-body text-center">
+            <h5 class="card-title">Life</h5>
+            <p class="card-text">₱300</p>
+            <button class="btn btn-primary" onclick="openModal('Life', 300)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="book2.jfif" class="card-img-top book-img" alt="The Well-Lived Life">
+          <div class="card-body text-center">
+            <h5 class="card-title">The Well-Lived Life</h5>
+            <p class="card-text">₱250</p>
+            <button class="btn btn-primary" onclick="openModal('The Well-Lived Life', 250)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="book3.webp" class="card-img-top book-img" alt="Find Your Life's Purpose">
+          <div class="card-body text-center">
+            <h5 class="card-title">Find Your Life's Purpose</h5>
+            <p class="card-text">₱150</p>
+            <button class="btn btn-primary" onclick="openModal('Find Your Lifes Purpose', 150)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container mt-5">
+  <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#transactionCollapse" aria-expanded="false" aria-controls="transactionCollapse">
+  Transaction History
+  </button>
+
+  <div class="collapse" id="transactionCollapse">
+    <div class="card card-body bg-light">
+      <h4 class="text-primary mb-3">Transaction History</h4>
+      <ul id="transactionList" class="list-group"></ul>
+    </div>
+  </div>
+</div>
+
+  
+  <div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-4">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookModalLabel">Add to Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p><strong>Book:</strong> <span id="modalBookName"></span></p>
+          <p><strong>Price:</strong> ₱<span id="modalBookPrice"></span></p>
+          <div class="d-flex justify-content-center align-items-center mb-3">
+            <button class="btn btn-outline-primary qty-btn" onclick="decreaseQuantity()">−</button>
+            <span class="quantity" id="modalQuantity">1</span>
+            <button class="btn btn-outline-primary qty-btn" onclick="increaseQuantity()">+</button>
+          </div>
+          <button class="btn btn-primary" onclick="addToCart()">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="footer bg-success" >
+    &copy; 2025 LifeBrary. All rights reserved.
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let currentQuantity = 1;
+    let currentBook = '';
+    let currentPrice = 0;
+
+    const modal = new bootstrap.Modal(document.getElementById('bookModal'));
+
+    function openModal(book, price) {
+      currentQuantity = 1;
+      currentBook = book;
+      currentPrice = price;
+
+      document.getElementById('modalBookName').textContent = currentBook;
+      document.getElementById('modalBookPrice').textContent = currentPrice.toFixed(2);
+      document.getElementById('modalQuantity').textContent = currentQuantity;
+
+      modal.show();
+    }
+
+    function increaseQuantity() {
+      currentQuantity++;
+      document.getElementById('modalQuantity').textContent = currentQuantity;
+    }
+
+    function decreaseQuantity() {
+      if (currentQuantity > 1) {
+        currentQuantity--;
+        document.getElementById('modalQuantity').textContent = currentQuantity;
+      }
+    }
+
+   function addToCart() {
+  if (currentQuantity < 3) {
+    alert("⚠️ You must order at least 3 books.");
+    return;
+  }
+
+
+  const total = currentPrice * currentQuantity;
+  const timestamp = new Date().toLocaleString();
+  const transactionList = document.getElementById('transactionList');
+
+  const listItem = document.createElement('li');
+  listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+  listItem.innerHTML = `
+    <div>
+      <strong>${currentBook}</strong><br>
+      Quantity: ${currentQuantity}<br>
+      Total: ₱${total.toFixed(2)}<br>
+      <small class="text-muted"> ${timestamp}</small>
+    </div>
+    <span class="badge bg-primary rounded-pill">₱${total.toFixed(2)}</span>
+  `;
+
+  transactionList.appendChild(listItem);
+
+  alert(`${currentBook} x${currentQuantity} (₱${total.toFixed(2)}) Successfully ordered!`);
+  modal.hide();
+}
+function logout() {
+  
+  alert("You have been logged out.");
+  window.location.href = "loginform.html"; 
+}
+  </script>
+</body>
+</html>
